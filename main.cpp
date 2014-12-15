@@ -2,9 +2,9 @@
 #define _CRT_SECURE_CPP_OVERLOAD_STANDARD_NAMES 1
 #include <windows.h>
 #include <fstream>
-#include <ostream>
+#include <istream>
 #include <iostream>
-#include <fstream>
+#include <ostream>
 #include <stdio.h>
 #include <time.h>
 #include <sys/types.h>
@@ -98,7 +98,7 @@ void __cdecl sdlogtime() {
 }
 
 void __cdecl sdlog(const char *fmt, ...) {
-	if(ofile != NULL) {
+	if(ofile.is_open()) {
 		if(!fmt) { return; }
 
 		va_list va_alist;
@@ -134,5 +134,5 @@ void errorExit(LPTSTR lpszFunction) {
 
 bool fileExists(const char *filename) {
   std::ifstream ifile(filename);
-  return NULL != ifile;
+  return ifile.is_open();
 }
